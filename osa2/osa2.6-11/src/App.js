@@ -2,21 +2,26 @@ import React from 'react';
 import Puhelinluettelo from './components/Puhelinluettelo'
 import AddPersonForm from './components/AddPersonForm'
 import FilterView from './components/FilterView'
+import axios from 'axios'
 
 class App extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      persons: [
-        { name: 'Arto Hellas', number: '040-123456', id: 1 },
-        { name: 'Martti Tienari', number: '040-23456', id: 2},
-        { name: 'Arto Järvinen', number: '040-3456', id: 3},
-        { name: 'Lea Kutvonen', number: '040-456', id: 4}
-      ],
+      persons: [],
       newName: '',
       newPhone: '',
       filter: ''
     }
+  }
+  componentWillMount() {
+    console.log('will mount')
+    axios
+      .get('http://localhost:3001/persons')
+      .then(response => {
+        console.log('promise fulfilled')
+        this.setState({ persons: response.data })
+      })
   }
 
   addName = (event) => {
