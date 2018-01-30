@@ -11,14 +11,19 @@
       "id": 2
     },
     {
-      "name": "Arto Järvinen",
-      "number": "040-3456",
-      "id": 3
-    },
-    {
       "name": "Lea Kutvonen",
       "number": "040-456",
       "id": 4
+    },
+    {
+      "name": "Venla",
+      "number": "1/0 + (-1/0)",
+      "id": 6
+    },
+    {
+      "name": "pekk",
+      "number": "14",
+      "id": 7
     }
   ]
 }

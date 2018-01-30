@@ -1,6 +1,6 @@
 import React from 'react'
 
-const Puhelinluettelo = ({persons}) => {
+const Puhelinluettelo = ({persons, delFunc}) => {
 
   return (
     <div>
@@ -11,6 +11,9 @@ const Puhelinluettelo = ({persons}) => {
             <tr key={person.id}>
               <td>{person.name}</td>
               <td>{person.number}</td>
+              <td>
+                <button onClick={delFunc(person)}>Delete</button>
+              </td>
             </tr>
           ))}
         </tbody>
