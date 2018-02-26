@@ -28,7 +28,7 @@ loginRouter.post('/', async (req, res) => {
     console.log(e)
     res.status(400).end()
   }
-  
+
 })
 
 module.exports = loginRouter
