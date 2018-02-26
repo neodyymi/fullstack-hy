@@ -1,9 +1,10 @@
-POST http://localhost:3003/api/blogs
+POST http://localhost:3001/api/blogs
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InBhYXZvX251b3JpIiwiaWQiOiI1YTk0MTA0MmFlYjY0NTA2NjY2MzdkMTQiLCJpYXQiOjE1MTk2NjI5Njl9.VpvvmlzAwFHBhKLb-v6F1prm4wiLSKPdNcnVMx0HIbQ
 
 {
     "title": "Väyrysen valtakunta",
     "author": "Paavo Väyrynen",
     "url": "www.kepu.fi/",
-    "likes": 0
+    "likes": 1
 }
