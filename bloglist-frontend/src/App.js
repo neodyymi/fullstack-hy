@@ -79,6 +79,28 @@ class App extends React.Component {
     }, 5000)
   }
 
+  deleteBlog = (blog) => {
+    return async () => {
+      if(window.confirm(`Do you want to delete ${blog.title}?`)) {
+        try{
+          await blogService.del(blog.id)
+          this.setState({
+            blogs: this.state.blogs.filter(b => b.id !== blog.id),
+            notification: `Removed ${blog.title} by ${blog.author}`
+          })
+          setTimeout(() => {
+            this.setState({ notification: null })
+          }, 5000)
+        } catch(e) {
+          console.log(e)
+          this.setState({
+            blogs: this.state.blogs.filter(b => b.id !== blog.id)
+          })
+        }
+      }
+    }
+  }
+
   handleBlogChange = (event) => {
     this.setState({ [event.target.name]: event.target.value })
   }
@@ -133,8 +155,11 @@ class App extends React.Component {
         </div>
 
         <h2>blogs</h2>
-        {this.state.blogs.map(blog => 
-          <Blog key={blog.id} blog={blog}/>
+        {this.state.blogs.sort((a, b) => {
+          return b.likes - a.likes
+        })
+          .map(blog => 
+          <Blog key={blog.id} blog={blog} delFunc={this.deleteBlog.bind(this)} user={this.state.user} />
         )}
       </div>
     );
