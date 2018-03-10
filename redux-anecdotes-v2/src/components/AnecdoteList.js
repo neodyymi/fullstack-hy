@@ -4,21 +4,12 @@ import { actionForNotification } from '../reducers/notificationReducer'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import Filter from './Filter'
-import anecdoteService from '../services/anecdotes'
 
 class AnecdoteList extends React.Component {
 
   onClickVote = (anecdote) => async () => {
-    const updatedAnecdote = await anecdoteService.updateOne(anecdote)
-
-    this.props.anecdoteVoting(updatedAnecdote.id)
-    clearTimeout(this.props.notification.timeout)
-    this.props.notificationSet(
-      `You voted '${updatedAnecdote.content}'`,
-      setTimeout(() => {
-        this.props.notificationUnset()
-      }, 5000)
-    )
+    this.props.anecdoteVoting(anecdote)
+    this.props.notificationSet(`You voted '${anecdote.content}'`, 5)
   }
 
   render() {
@@ -52,15 +43,13 @@ const filterAnecdotes = (anecdotes, filter) => {
 
 const mapStateToProps = (state) => {
   return {
-    anecdotes: filterAnecdotes(state.anecdotes, state.filter),
-    notification: state.notification
+    anecdotes: filterAnecdotes(state.anecdotes, state.filter)
   }
 }
 
 const mapDispatchToProps = {
   anecdoteVoting: actionForAnecdote.anecdoteVoting,
-  notificationSet: actionForNotification.notificationSet,
-  notificationUnset: actionForNotification.notificationUnset
+  notificationSet: actionForNotification.notificationSet
 }
 
 const ConnectedAnecdoteList = connect(
